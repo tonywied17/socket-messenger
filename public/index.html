@@ -1,33 +1,36 @@
 <!--
 File: c:\Users\tonyw\Desktop\socketChat\public\index.html
-Project: c:\Users\tonyw\Desktop\socketChat
+Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
 Created Date: Thursday August 17th 2023
 Author: Tony Wiedman
 -----
-Last Modified: Fri August 18th 2023 4:53:33 
+Last Modified: Fri August 18th 2023 6:47:06 
 Modified By: Tony Wiedman
 -----
 Copyright (c) 2023 Tone Web Design, Molex
 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MolexMessenger</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="./css/all.min.css" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/dom.js"></script>
-    <script src="./js/messenger.js" defer></script>
-  </head>
-  <body>
-    <nav>
-      <h3><span style="font-weight:900;"><i class="fa-regular fa-comments"></i> Molex</span><span style="font-weight:100;">Messenger</span></h3>
-      <button id="settingsButton"><i class="fa-solid fa-gears"></i> Settings</button>
-    </nav>
 
-    <!-- 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MolexMessenger</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./css/all.min.css" />
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./js/dom.js"></script>
+  <script src="./js/messenger.js" defer></script>
+</head>
+
+<body>
+  <nav>
+    <h3><span style="font-weight:900;"><i class="fa-regular fa-comments"></i> Molex</span><span
+        style="font-weight:100;">Messenger</span></h3>
+    <button id="settingsButton"><i class="fa-solid fa-gears"></i> Settings</button>
+  </nav>
+
+  <!-- 
       ! Initial username input overlay 
       ? This is the first thing the user sees when they visit the site
       ? It will ask them to enter a username and choose a color
@@ -35,82 +38,84 @@ Copyright (c) 2023 Tone Web Design, Molex
       ? If the user has already entered a username and color, the overlay will not be shown
       ? The user will be able to open the settings overlay to change their username and color
     -->
-    <div id="overlay">
-      <div id="usernamePrompt">
-        <h2>Welcome to Chat</h2>
-        <p>Enter your username to join</p>
-        <input type="text" id="username" required />
-        <label for="colorPicker">Choose username color:</label>
-        <input type="color" id="colorPicker" value="#ECF0F1" />
-        <button id="joinChat">Join Chat</button>
-      </div>
+  <div id="overlay">
+    <div id="usernamePrompt">
+      <h2>Welcome to Chat</h2>
+      <p>Enter your username to join</p>
+      <input type="text" id="username" required />
+      <label for="colorPicker">Choose username color:</label>
+      <input type="color" id="colorPicker" value="#ECF0F1" />
+      <button id="joinChat">Join Chat</button>
     </div>
+  </div>
 
-    <!-- 
+  <!-- 
       ! Settings Overlay 
       ? This overlay will be shown when the user clicks the settings button
       ? It will allow the user to change their username and color
       ? The username and color will be stored in localStorage
     -->
-    <div id="settingsOverlay">
-      <div id="settingsPrompt">
-        <h2>Settings</h2>
-        <label for="newUsername">Change Username:</label>
-        <input type="text" id="newUsername" placeholder="New username" />
-        <label for="newColorPicker">Change Color:</label>
-        <input type="color" id="newColorPicker" value="#ECF0F1" />
-        <button id="updateSettings">Update</button>
-        <button id="closeSettings">Close</button>
-      </div>
+  <div id="settingsOverlay">
+    <div id="settingsPrompt">
+      <h2>Settings</h2>
+      <label for="newUsername">Change Username:</label>
+      <input type="text" id="newUsername" placeholder="New username" />
+      <label for="newColorPicker">Change Color:</label>
+      <input type="color" id="newColorPicker" value="#ECF0F1" />
+      <button id="updateSettings">Update</button>
+      <button id="closeSettings">Close</button>
     </div>
+  </div>
 
-    <!-- 
+  <!-- 
       ! YouTube Video Searcher
       ? This overlay will be shown when the user clicks the YouTube button
       ? It will allow the user to search for YouTube videos and send them to the chat
      -->
-    <div id="ytOverlay">
-      <div id="youtubePopup">
-        <button id="closeYouTube" style="display:block;float:right;">X</button>
-        <input
-          type="text"
-          id="youtubeSearchInput"
-          placeholder="Search YouTube"
-        />
-        <button style="display:none;" id="searchYouTube">Search</button>
-        <ul id="searchResults"></ul>
-      </div>
+  <div id="ytOverlay">
+    <div id="youtubePopup">
+      <button id="closeYouTube" style="display:block;float:right;">X</button>
+      <input type="text" id="youtubeSearchInput" style="width: 70%" placeholder="Search YouTube" />
+      <button style="display:none;" id="searchYouTube">Search</button>
+      <ul id="searchResults"></ul>
     </div>
+  </div>
 
-    <!-- 
+  <!-- 
       ! Chat UI 
       ? This is the main chat UI
       ? It will be shown after the user enters their username and color
       ? It will show the messages and allow the user to send messages
     -->
-    <ul id="messages"></ul>
-    <div id="typingArea" style="color: gray"></div>
+  <ul id="messages"></ul>
+  <div id="typingArea" style="color: gray"></div>
 
-    <form id="chatForm" class="flex-container">
-      <input
-        id="inputMessage"
-        autocomplete="off"
-        placeholder="Enter message..."
-        class="flex-item"
-      />
-      <button id="openYouTube" type="button">
-        <i class="fa-brands fa-youtube"></i>
-      </button>
-      <label for="imageInput" class="flex-item upload-btn">
-        <i class="fa-regular fa-images"></i>
-      </label>
-      <input
-        type="file"
-        id="imageInput"
-        accept="image/*"
-        style="display: none"
-      />
-      <button class="flex-item" style="background-color: #6181a1;">Send <i class="fa-regular fa-paper-plane"></i></button>
-    </form>
-  </body>
+  <form id="chatForm" class="flex-container">
+    <input id="inputMessage" autocomplete="off" placeholder="Enter message..." style="width: 100%; padding: 10px;" />
+    <button id="openYouTube" type="button">
+      <i class="fa-brands fa-youtube fa-2x"></i>
+    </button>
+
+    <button id="selectImageButton" class="upload-btn" type="button">
+      <i class="fa-regular fa-images fa-2x"></i>
+    </button>
+
+
+    <input type="file" id="imageInput" accept="image/*" style="display: none" />
+
+
+    <button class="send-btn" style="background-color: #6181a1;">Send <i class="fa-regular fa-paper-plane"></i></button>
+  </form>
+
+  <script>
+    const selectImageButton = document.getElementById('selectImageButton');
+    const imageInput = document.getElementById('imageInput');
+
+    selectImageButton.addEventListener('click', () => {
+
+      imageInput.click();
+    });
+  </script>
+</body>
+
 </html>

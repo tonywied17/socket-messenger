@@ -4,7 +4,7 @@
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 5:19:03 
+ * Last Modified: Fri August 18th 2023 6:14:56 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -424,13 +424,31 @@ socket.on("youtube search results", (results) => {
     });
 });
 
+
+const apiKey = '<%= apiKey %>';
+
+async function searchYouTube(query) {
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
+
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    const searchResults = data.items.map((item) => ({
+        videoId: item.id.videoId,
+        title: item.snippet.title,
+    }));
+
+    return searchResults;
+}
+
 /**
  * Search YouTube API
  * @param {string} query - search query
  * @returns 
  */
 async function searchYouTube(query) {
-    const apiKey = "AIzaSyDfwZLXUgxw2rHZthoYYyRt_ghW5mOIe2w";
+    
+    const apiKey = "AIzaSyBVEgPdOaLDpuVzB5Pzp88caQ4U1YLcPUc";
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
 
     const response = await fetch(apiUrl);

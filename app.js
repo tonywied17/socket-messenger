@@ -1,10 +1,10 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\server.js
- * Project: c:\Users\tonyw\Desktop\socketChat
+ * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
  * Created Date: Thursday August 17th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 4:18:22 
+ * Last Modified: Fri August 18th 2023 6:47:25 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -13,15 +13,18 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
-
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-/**
- * Get static files from public folder
- */
-app.use(express.static("public"));
+require('dotenv').config();
+
+app.set('view engine', 'ejs'); // Set the view engine
+app.use(express.static('public')); // Serve static assets from 'public' directory
+
+app.get('/yt', (req, res) => {
+  res.render('index', { apiKey: process.env.YOUTUBE_API_KEY }); 
+});
 
 /**
  * Socket.io
