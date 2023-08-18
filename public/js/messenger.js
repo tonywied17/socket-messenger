@@ -1,10 +1,10 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\public\js\messenger.js
- * Project: c:\Users\tonyw\Desktop\socketChat
+ * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 4:53:15 
+ * Last Modified: Fri August 18th 2023 5:19:03 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -146,8 +146,7 @@ socket.on("system message", function (message) {
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
 
-    const messagesElement = Id("messages");
-    messagesElement.scrollTop = messagesElement.scrollHeight;
+    Id("messages").scrollTop = Id("messages").scrollHeight;
 });
 
 /**
@@ -171,6 +170,7 @@ socket.on("chat message", function (data) {
     const li = document.createElement("li");
     li.innerHTML = `<span style="color:${userColor}">${username}:</span> ${convertedMessage}`;
     Id("messages").appendChild(li);
+    Id("messages").scrollTop = Id("messages").scrollHeight;
 });
 
 /**
@@ -183,6 +183,7 @@ socket.on("color updated", function (data) {
     li.innerHTML = `${data.message} <span style="background-color:${data.color}; display: inline-block; width: 14px; height: 14px; border-radius: 50%;"></span>`;
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
+    Id("messages").scrollTop = Id("messages").scrollHeight;
 });
 
 /**
@@ -195,6 +196,7 @@ socket.on("username updated", function (data) {
     li.textContent = data.message;
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
+    Id("messages").scrollTop = Id("messages").scrollHeight;
 });
 
 /**
@@ -251,7 +253,17 @@ document
 socket.on("receive image", function (data) {
     console.log("Received image on client:", data);
     const li = document.createElement("li");
-    li.innerHTML = `<div style="color:${data.userColor}">${data.username}:</div> <img src="${data.imageData}" alt="Shared Image" width="200">`;
+    const img = document.createElement("img");
+    
+    img.src = data.imageData;
+    img.alt = "Shared Image";
+    img.width = 200;
+    img.onload = function() {
+        Id("messages").scrollTop = Id("messages").scrollHeight;
+    };
+
+    li.innerHTML = `<div style="color:${data.userColor}">${data.username}:</div>`;
+    li.appendChild(img);
     Id("messages").appendChild(li);
 });
 
@@ -445,6 +457,8 @@ function sendYouTubeLink(videoId) {
         message: `https://www.youtube.com/watch?v=${videoId}`,
         userColor,
     });
+
+    Id("messages").scrollTop = Id("messages").scrollHeight;
 }
 
 /**
