@@ -4,7 +4,7 @@
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 6:14:56 
+ * Last Modified: Fri August 18th 2023 7:48:38 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -326,25 +326,6 @@ function updateTypingArea(typingArea) {
     }
 }
 
-/**
- * Listen for input change in youtube search and display results in overlay
- * @returns {void}
- */
-searchInput.addEventListener("input", async () => {
-    const query = searchInput.value;
-    const searchResults = await searchYouTube(query);
-
-    searchResultsList.innerHTML = "";
-    searchResults.forEach((result) => {
-        const li = document.createElement("li");
-        li.textContent = result.title;
-        li.addEventListener("click", () => {
-            sendYouTubeLink(result.videoId);
-            Id("ytOverlay").style.display = "none";
-        });
-        searchResultsList.appendChild(li);
-    });
-});
 
 /**
  * Show YouTube search overlay
@@ -425,22 +406,6 @@ socket.on("youtube search results", (results) => {
 });
 
 
-const apiKey = '<%= apiKey %>';
-
-async function searchYouTube(query) {
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
-
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    const searchResults = data.items.map((item) => ({
-        videoId: item.id.videoId,
-        title: item.snippet.title,
-    }));
-
-    return searchResults;
-}
-
 /**
  * Search YouTube API
  * @param {string} query - search query
@@ -448,7 +413,7 @@ async function searchYouTube(query) {
  */
 async function searchYouTube(query) {
     
-    const apiKey = "AIzaSyBVEgPdOaLDpuVzB5Pzp88caQ4U1YLcPUc";
+    const apiKey = "";
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
 
     const response = await fetch(apiUrl);
