@@ -1,0 +1,259 @@
+/*
+ * File: c:\Users\tonyw\Desktop\socketChat\public\styles.css
+ * Project: c:\Users\tonyw\Desktop\socketChat
+ * Created Date: Thursday August 17th 2023
+ * Author: Tony Wiedman
+ * -----
+ * Last Modified: Fri August 18th 2023 4:54:20 
+ * Modified By: Tony Wiedman
+ * -----
+ * Copyright (c) 2023 Tone Web Design, Molex
+ */
+/* Base Styles */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  padding: 10px;
+}
+
+label {
+  margin-right: 5px;
+}
+
+ul {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 10px;
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #34495e;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  width: 100%;
+}
+
+/* Flex Styles */
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item {
+  margin: 5px;
+}
+
+/* Username Styles */
+#username {
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  width: 200px;
+}
+
+/* Chat Form Styles */
+#chatForm {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #34495e;
+  background-color: #233242;
+}
+
+#inputMessage {
+  flex-grow: 1; 
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+/* Button Styles */
+button, .upload-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e74c3c;
+  color: #ecf0f1;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover, .upload-btn:hover {
+  background-color: #c0392b;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #233242;
+  color: #ecf0f1;
+  border-bottom: 1px solid #34495e;
+  user-select: none;
+}
+
+nav button {
+  padding: 5px 10px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+nav button:hover {
+  background-color: #4a6891;
+}
+
+/* Overlay Styles */
+#overlay, #settingsOverlay, #ytOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(44, 62, 80, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#settingsOverlay, #ytOverlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+}
+
+#usernamePrompt, #settingsPrompt, #youtubePopup {
+  background-color: #2c3e50;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #4a6891;
+}
+
+#settingsPrompt h2, #youtubePopup h2 {
+  text-align: center;
+  color: #ecf0f1;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+#usernamePrompt input[type="text"], #settingsPrompt input, #settingsPrompt button {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+}
+
+#settingsPrompt button:hover, #youtubePopup button:hover {
+  background-color: #4a6891;
+}
+
+/* YouTube Popup Styles */
+#youtubePopup {
+  width: 700px;
+}
+
+#youtubePopup input[type="text"] {
+  margin-bottom: 10px;
+}
+
+#searchResults {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto; 
+}
+
+#searchResults li {
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#searchResults li:hover {
+  background-color: #f2f2f2;
+}
+
+/* Settings Styles */
+#settings {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-top: 1px solid #ecf0f1;
+}
+
+#settings input[type="text"],
+#settings input[type="color"] {
+  margin-bottom: 5px;
+}
+
+#newUsername {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+#newColorPicker {
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+}
+
+#joinChat {
+  display: block;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* Overlay Adjustments */
+#settingsOverlay {
+  display: none; /* Default is hidden */
+}
+
+#ytOverlay {
+  display: none; /* Default is hidden */
+}
+
+/* Button Hover Effects Adjustments */
+.upload-btn:hover {
+  background-color: #34495e; 
+}
