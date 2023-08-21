@@ -4,7 +4,7 @@
  * Created Date: Thursday August 17th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 6:45:27 
+ * Last Modified: Mon August 21st 2023 2:25:08 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -21,10 +21,6 @@ html, body {
   height:100vh;
   display: flex;
   flex-direction: column;
-}
-
-div {
-  padding: 10px;
 }
 
 label {
@@ -48,15 +44,6 @@ li {
 
 h2 {
   margin-top: 0;
-}
-
-input[type="text"] {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #34495e;
-  color: #ecf0f1;
-  width: 100%;
 }
 
 /* Flex Styles */
@@ -83,43 +70,43 @@ input[type="text"] {
 #chatForm {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
   border-top: 1px solid #34495e;
   background-color: #233242;
-  column-gap: 3px;
-    gap: 4px;
-    padding: 5px;
+  padding:1em;
 }
 
 #inputMessage {
-  flex-grow: 1; 
-  padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   background-color: #34495e;
   color: #ecf0f1;
+  height: 50px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: 0;
+  transition: .2s;
+}
+
+#inputMessage:hover{
+   filter: brightness(1.1);
+}
+
+#inputMessage:focus{
+  filter: brightness(1.1);
 }
 
 /* Button Styles */
-button, .upload-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #e74c3c;
-  color: #ecf0f1;
-  cursor: pointer;
-  transition: background-color 0.3s;
+
+.send-btn{
+  height: 50px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
-button:hover, .upload-btn:hover {
-  background-color: #c0392b;
-}
-
-.upload-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+.send-btn:active{
+  transform: unset;
 }
 
 /* Navigation Bar */
@@ -127,11 +114,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #233242;
   color: #ecf0f1;
   border-bottom: 1px solid #34495e;
   user-select: none;
+  max-height: 75px;
 }
 
 nav button {
@@ -174,30 +163,107 @@ nav button:hover {
   border: 1px solid #4a6891;
 }
 
-#settingsPrompt h2, #youtubePopup h2 {
-  text-align: center;
-  color: #ecf0f1;
-  font-weight: 500;
-  margin-bottom: 20px;
+#settingsPrompt {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-#usernamePrompt input[type="text"], #settingsPrompt input, #settingsPrompt button {
-  display: block;
-  margin: 10px 0;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.close-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#newUsername,
+#newColorPicker {
   width: 100%;
+  height: 36px;
+  margin-top: 10px;
+  box-sizing: border-box;
 }
 
-#settingsPrompt button:hover, #youtubePopup button:hover {
-  background-color: #4a6891;
+#newColorPicker {
+  cursor: pointer;
+}
+
+#updateSettings {
+  margin-top: 20px;
 }
 
 /* YouTube Popup Styles */
 #youtubePopup {
   width: 700px;
+  display: flex;
+  flex-direction: column;
 }
 
-#youtubePopup input[type="text"] {
-  margin-bottom: 10px;
+.search-fields {
+  display: flex;
+  align-items: center;
+}
+
+#youtubeSearchInput {
+  flex: 1;
+  width: 100%;
+  border: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: 0;
+  transition: .2s;
+}
+
+#closeYouTube {
+  align-self: flex-end;
+  font-size: 1.1rem;
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+  margin-right: -0.5em;
+  background: transparent !important;
+}
+
+#closeSettings{
+  align-self: flex-end;
+  font-size: 1.1rem;
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+  margin-right: -0.5em;
+  background: transparent !important;
+}
+
+#searchYouTube {
+  height: 50px;
+  width: 50px;
+  border-top-left-radius: unset;
+  border-bottom-left-radius: unset;
+}
+
+#searchYouTube:active{
+  transform: unset;
+}
+
+#youtubeSearchInput:hover{
+  filter: brightness(1.1);
+}
+
+#youtubeSearchInput:focus{
+ filter: brightness(1.1);
 }
 
 #searchResults {
@@ -231,7 +297,6 @@ nav button:hover {
 }
 
 #newUsername {
-  padding: 10px;
   border: none;
   border-radius: 4px;
   background-color: #34495e;
@@ -259,21 +324,6 @@ nav button:hover {
   display: none; /* Default is hidden */
 }
 
-/* Button Hover Effects Adjustments */
-.upload-btn:hover {
-  background-color: #34495e; 
-}
-
-#openYouTube, .upload-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px; 
-  height: 40px;
-  background-color: #e74c3c; 
-  border-radius: 4px; 
-  font-size: 0.8rem !important;
-}
 
 /* Media query for mobile screens */
 @media (max-width: 768px) {
@@ -308,14 +358,69 @@ nav button:hover {
     display: flex; 
     align-items: center; 
   }
-  
-  .send-btn {
-    min-width: fit-content;
-    height:100%;
-  }
-  
-  .send-btn:hover {
-    background-color: #4a6891;
-  }
 
+
+}
+
+button {
+  background: #48658b;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #4a6891;
+}
+
+button:active {
+  background: #4a6891;
+  transform: scale(0.93);
+}
+
+.send-btn{
+  background: #48658b;
+}
+
+#tools {
+  background: linear-gradient(90deg, #233242, #34495e);
+  padding: 2px 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bar-btn-group {
+  display: flex;
+  align-items: center;
+}
+
+.bar-btn {
+  font-size: 1.2rem;
+  margin: 0.25rem;
+}
+
+#typingArea {
+  color: gray;
+  text-align: left;
+}
+
+::-webkit-scrollbar {
+  width: 8px; 
+  height: 8px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #233242;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a252a;
+}
+
+::-webkit-scrollbar-track {
+  background: #34495e; 
 }

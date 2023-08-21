@@ -4,7 +4,7 @@ Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
 Created Date: Thursday August 17th 2023
 Author: Tony Wiedman
 -----
-Last Modified: Fri August 18th 2023 7:45:22 
+Last Modified: Mon August 21st 2023 2:25:15 
 Modified By: Tony Wiedman
 -----
 Copyright (c) 2023 Tone Web Design, Molex
@@ -55,17 +55,21 @@ Copyright (c) 2023 Tone Web Design, Molex
       ? It will allow the user to change their username and color
       ? The username and color will be stored in localStorage
     -->
-  <div id="settingsOverlay">
-    <div id="settingsPrompt">
-      <h2>Settings</h2>
-      <label for="newUsername">Change Username:</label>
-      <input type="text" id="newUsername" placeholder="New username" />
-      <label for="newColorPicker">Change Color:</label>
-      <input type="color" id="newColorPicker" value="#ECF0F1" />
-      <button id="updateSettings">Update</button>
-      <button id="closeSettings">Close</button>
+    <div id="settingsOverlay">
+      <div id="settingsPrompt">
+        <div class="header">
+          <div class="title">User Settings</div>
+          <div class="close-button">
+            <button id="closeSettings"><i class="fa-solid fa-circle-xmark"></i></button>
+          </div>
+        </div>
+        <div>
+          <input type="text" id="newUsername" placeholder="New username" />
+          <input type="color" id="newColorPicker" value="#ECF0F1" />
+        </div>
+        <button id="updateSettings">Update</button>
+      </div>
     </div>
-  </div>
 
   <!-- 
       ! YouTube Video Searcher
@@ -74,9 +78,16 @@ Copyright (c) 2023 Tone Web Design, Molex
      -->
   <div id="ytOverlay">
     <div id="youtubePopup">
-      <button id="closeYouTube" style="display:block;float:right;">X</button>
-      <input type="text" id="youtubeSearchInput" style="width: 70%" placeholder="Search YouTube" />
-      <button id="searchYouTube">Search</button>
+      <div class="header">
+        <div class="title"><i style="margin-right:0.25rem;color:#e52016;" class="fa-brands fa-youtube"></i> Share Youtube Videos</div>
+        <div class="close-button">
+          <button id="closeYouTube"><i class="fa-solid fa-circle-xmark"></i></button>
+        </div>
+      </div>
+      <div class="search-fields">
+        <input type="text" id="youtubeSearchInput" placeholder="Search YouTube" />
+        <button id="searchYouTube"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
       <ul id="searchResults"></ul>
     </div>
   </div>
@@ -88,23 +99,22 @@ Copyright (c) 2023 Tone Web Design, Molex
       ? It will show the messages and allow the user to send messages
     -->
   <ul id="messages"></ul>
-  <div id="typingArea" style="color: gray"></div>
-
+  <div id="tools">
+    <div id="typingArea"></div>
+    <div class="bar-btn-group">
+      <button id="openYouTube" class="bar-btn" type="button">
+        <i class="fa-brands fa-youtube"></i>
+      </button>
+      <button id="selectImageButton" class="bar-btn" type="button">
+        <i class="fa-regular fa-images"></i>
+      </button>
+    </div>
+  </div>
+  
   <form id="chatForm" class="flex-container">
-    <input id="inputMessage" autocomplete="off" placeholder="Enter message..." style="width: 100%; padding: 10px;" />
-    <button id="openYouTube" type="button">
-      <i class="fa-brands fa-youtube fa-2x"></i>
-    </button>
-
-    <button id="selectImageButton" class="upload-btn" type="button">
-      <i class="fa-regular fa-images fa-2x"></i>
-    </button>
-
-
+    <input id="inputMessage" autocomplete="off" placeholder="Enter message..." />
     <input type="file" id="imageInput" accept="image/*" style="display: none" />
-
-
-    <button class="send-btn" style="background-color: #6181a1;">Send <i class="fa-regular fa-paper-plane"></i></button>
+    <button class="send-btn"><i class="fa-regular fa-paper-plane fa-2x"></i></button>
   </form>
 
   <script>

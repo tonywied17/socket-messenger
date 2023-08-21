@@ -4,25 +4,12 @@
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Fri August 18th 2023 7:48:38 
+ * Last Modified: Mon August 21st 2023 1:12:30 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
  */
 const socket = io();
-
-// Initial overlay
-const overlay = Id("overlay");
-const joinChatButton = Id("joinChat");
-const colorPicker = Id("colorPicker");
-
-// Settings overlay
-const settingsOverlay = Id("settingsOverlay");
-const closeSettingsButton = Id("closeSettings");
-const settingsButton = Id("settingsButton");
-const newUsernameInput = Id("newUsername");
-const newColorPicker = Id("newColorPicker");
-const updateSettingsButton = Id("updateSettings");
 
 // Get LocalStorage
 const storedUsername = localStorage.getItem("username");
@@ -30,16 +17,7 @@ const storedColor = localStorage.getItem("userColor");
 
 // Typing indicator
 const typingUsers = new Set();
-const inputMessage = Id("inputMessage");
 let typingTimeout;
-
-// YouTube search overlay
-const openPopupButton = Id("openPopup");
-const searchInput = Id("youtubeSearchInput");
-const searchResultsList = Id("searchResults");
-const openButton = Id("openYouTube");
-const closeButton = Id("closeYouTube");
-const ytOverlay = Id("ytOverlay");
 
 /**
  * Check if username and color are stored in localStorage
@@ -51,8 +29,8 @@ const ytOverlay = Id("ytOverlay");
  */
 if (storedUsername && storedColor) {
     Id("username").value = storedUsername;
-    colorPicker.value = storedColor;
-    overlay.style.display = "none";
+    Id("colorPicker").value = storedColor;
+    Id("overlay").style.display = "none";
     socket.emit("user joined", {
         username: storedUsername,
         userColor: storedColor,
@@ -65,12 +43,12 @@ if (storedUsername && storedColor) {
  * @param {string} username
  * @returns {void}
  */
-joinChatButton.addEventListener("click", () => {
+Id("joinChat").addEventListener("click", () => {
     const username = Id("username").value;
-    const userColor = colorPicker.value;
+    const userColor = Id("colorPicker").value;
 
     if (username.trim() !== "") {
-        overlay.style.display = "none";
+        Id("overlay").style.display = "none";
 
         localStorage.setItem("username", username);
         localStorage.setItem("userColor", userColor);
@@ -87,10 +65,10 @@ joinChatButton.addEventListener("click", () => {
  * Display settings overlay
  * @returns {void}
  */
-settingsButton.addEventListener("click", () => {
-    settingsOverlay.style.display = "flex";
-    newUsernameInput.value = Id("username").value;
-    newColorPicker.value = colorPicker.value;
+Id("settingsButton").addEventListener("click", () => {
+    Id("settingsOverlay").style.display = "flex";
+    Id("newUsername").value = Id("username").value;
+    Id("newColorPicker").value = Id("colorPicker").value;
 });
 
 /**
@@ -98,8 +76,8 @@ settingsButton.addEventListener("click", () => {
  * Hide settings overlay
  * @returns {void}
  */
-closeSettingsButton.addEventListener("click", () => {
-    settingsOverlay.style.display = "none";
+Id("closeSettings").addEventListener("click", () => {
+    Id("settingsOverlay").style.display = "none";
 });
 
 /**
@@ -107,12 +85,12 @@ closeSettingsButton.addEventListener("click", () => {
  * Emit update username event
  * @returns {void}
  */
-updateSettingsButton.addEventListener("click", () => {
-    const newUsername = newUsernameInput.value.trim();
+Id("updateSettings").addEventListener("click", () => {
+    const newUsername = Id("newUsername").value.trim();
     const oldUsername = Id("username").value;
-    const newColor = newColorPicker.value;
+    const newColor = Id("newColorPicker").value;
 
-    colorPicker.value = newColorPicker.value;
+    Id("colorPicker").value = Id("newColorPicker").value;
 
     if (newUsername !== "" && newUsername !== oldUsername) {
         socket.emit("update username", {
@@ -132,7 +110,7 @@ updateSettingsButton.addEventListener("click", () => {
         });
     }
 
-    newUsernameInput.value = "";
+    Id("newUsername").value = "";
 });
 
 /**
@@ -209,12 +187,12 @@ Id("chatForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const message = Id("inputMessage").value;
     const username = Id("username").value;
-    const userColor = colorPicker.value;
+    const userColor = Id("colorPicker").value;
 
     socket.emit("chat message", {
         username,
         message,
-        userColor: colorPicker.value,
+        userColor: Id("colorPicker").value,
     });
     Id("inputMessage").value = "";
 });
@@ -272,7 +250,7 @@ socket.on("receive image", function (data) {
  * @param {Event} e - keyup event
  * @returns {void}
  */
-inputMessage.addEventListener("keyup", function () {
+Id("inputMessage").addEventListener("keyup", function () {
     clearTimeout(typingTimeout);
 
     socket.emit("typing", {
@@ -326,39 +304,36 @@ function updateTypingArea(typingArea) {
     }
 }
 
-
 /**
  * Show YouTube search overlay
  * @returns {void}
  */
 function showYouTubeOverlay() {
-    const ytOverlay = Id("ytOverlay");
-    ytOverlay.style.display = "flex";
+    Id("ytOverlay").style.display = "flex";
 }
 /**
  * Hide YouTube search overlay
  * @returns {void}
  */
 function hideYouTubeOverlay() {
-    const ytOverlay = Id("ytOverlay");
-    ytOverlay.style.display = "none";
+    Id("ytOverlay").style.display = "none";
 }
 /**
  * Listen for open popup button click
  * Show YouTube search overlay
  */
-openButton.addEventListener("click", showYouTubeOverlay);
+Id("openYouTube").addEventListener("click", showYouTubeOverlay);
 /**
  * Listen for close popup button click
  * Hide YouTube search overlay
  */
-closeButton.addEventListener("click", hideYouTubeOverlay);
+Id("closeYouTube").addEventListener("click", hideYouTubeOverlay);
 /**
  * Listen for click outside of YouTube search overlay
  * Hide YouTube search overlay
  */
-ytOverlay.addEventListener("click", function (event) {
-    if (event.target === ytOverlay) {
+Id("ytOverlay").addEventListener("click", function (event) {
+    if (event.target === Id("ytOverlay")) {
         hideYouTubeOverlay();
     }
 });
@@ -375,8 +350,7 @@ document
             Id("youtubeSearchInput").value;
         const searchResults = await searchYouTube(searchQuery);
 
-        const searchResultsList = Id("searchResults");
-        searchResultsList.innerHTML = "";
+        Id("searchResults").innerHTML = "";
 
         searchResults.forEach((result) => {
             const listItem = document.createElement("li");
@@ -385,7 +359,7 @@ document
                 sendYouTubeLink(result.videoId);
                 Id("ytOverlay").style.display = "none";
             });
-            searchResultsList.appendChild(listItem);
+            Id("searchResults").appendChild(listItem);
         });
     });
 
