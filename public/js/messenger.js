@@ -1,10 +1,10 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\public\js\messenger.js
- * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
+ * Project: c:\Users\tonyw\AppData\Local\Temp\scp06458\public_html\messenger.tonewebdesign.com\public\js
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 2:36:29 
+ * Last Modified: Mon August 21st 2023 2:34:44 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex

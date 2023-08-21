@@ -1,24 +1,27 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\public\styles.css
- * Project: c:\Users\tonyw\AppData\Local\Temp\scp59978\public_html\messenger.tonewebdesign.com\public
+ * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
  * Created Date: Thursday August 17th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 2:35:20 
+ * Last Modified: Mon August 21st 2023 5:54:10 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
  */
 /* Base Styles */
-html, body {
+html {
+  height: -webkit-fill-available;
+}
+body {
   font-family: "Arial", sans-serif;
   background-color: #2c3e50;
   color: #ecf0f1;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   margin: 0;
   padding:0;
   width:100vw;
-  height:100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -153,7 +156,7 @@ nav button:hover {
   z-index: 1000;
 }
 
-#settingsOverlay, #ytOverlay {
+#settingsOverlay, #ytOverlay, #overlay {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 2000;
 }
@@ -166,11 +169,17 @@ nav button:hover {
   border: 1px solid #4a6891;
 }
 
-#settingsPrompt {
+#usernamePrompt {
   width: 300px;
+}
+
+#settingsPrompt {
+  background-color: #2c3e50;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #4a6891;
+  width: 300px;
 }
 
 .header {
@@ -178,16 +187,17 @@ nav button:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .title {
   font-size: 18px;
 }
 
-.close-button {
+/* .close-button {
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 #newUsername,
 #newColorPicker {
@@ -197,7 +207,7 @@ nav button:hover {
   box-sizing: border-box;
 }
 
-#newColorPicker {
+#newColorPicker, #colorPicker {
   cursor: pointer;
 }
 
@@ -241,13 +251,17 @@ nav button:hover {
   background: transparent !important;
 }
 
-#closeSettings{
-  align-self: flex-end;
+#closeSettings {
+  background: transparent;
+  border: none;
   font-size: 1.1rem;
-  margin-top: -0.5em;
-  margin-bottom: 0.5em;
-  margin-right: -0.5em;
-  background: transparent !important;
+  color: #ecf0f1;
+  cursor: pointer;
+}
+
+#settingsPrompt input[type="text"],
+#settingsPrompt input[type="color"] {
+  margin-bottom: 5px;
 }
 
 #searchYouTube {
@@ -300,17 +314,15 @@ nav button:hover {
   margin-bottom: 5px;
 }
 
-#newUsername {
+#newUsername, #username {
   border: none;
   border-radius: 4px;
   background-color: #34495e;
   color: #ecf0f1;
 }
 
-#newColorPicker {
-  border: none;
-  border-radius: 4px;
-  background-color: #34495e;
+#username::placeholder, #newUsername::placeholder {
+  color: #b9b9b9; 
 }
 
 #joinChat {
@@ -319,13 +331,43 @@ nav button:hover {
   width: 100%;
 }
 
+#usernamePrompt, #settingsPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items:baseline;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#username, #newUsername {
+  flex: 1;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  width: 100%;
+}
+
+#colorPicker, #newColorPicker {
+  width: 50px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34495e;
+}
+
 /* Overlay Adjustments */
 #settingsOverlay {
-  display: none; /* Default is hidden */
+  display: none; 
 }
 
 #ytOverlay {
-  display: none; /* Default is hidden */
+  display: none;
 }
 
 
@@ -343,15 +385,11 @@ nav button:hover {
   }
   
   /* Style for the YouTube icon container */
-
-
   #imageInput + label {
     height: 40px; 
     display: flex; 
     align-items: center; 
   }
-
-
 }
 
 button {
