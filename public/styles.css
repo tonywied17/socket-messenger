@@ -1,10 +1,10 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\public\styles.css
- * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
+ * Project: c:\Users\tonyw\AppData\Local\Temp\scp59978\public_html\messenger.tonewebdesign.com\public
  * Created Date: Thursday August 17th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 2:36:15 
+ * Last Modified: Mon August 21st 2023 2:35:20 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -21,6 +21,7 @@ html, body {
   height:100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 label {
@@ -100,7 +101,9 @@ h2 {
 /* Button Styles */
 
 .send-btn{
-  height: 50px;
+  height: 52px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
@@ -330,16 +333,13 @@ nav button:hover {
 @media (max-width: 768px) {
   #inputMessage {
     width: 100%;
-    padding: 10px;
   }
   
   #chatForm {
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 3px;
-    gap: 4px;
-    padding: 5px;
+    padding: 0.5em;
   }
   
   /* Style for the YouTube icon container */
