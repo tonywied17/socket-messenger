@@ -4,7 +4,7 @@ Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
 Created Date: Thursday August 17th 2023
 Author: Tony Wiedman
 -----
-Last Modified: Mon August 21st 2023 5:48:10 
+Last Modified: Mon August 21st 2023 6:09:16 
 Modified By: Tony Wiedman
 -----
 Copyright (c) 2023 Tone Web Design, Molex
@@ -46,22 +46,22 @@ Copyright (c) 2023 Tone Web Design, Molex
       ? If the user has already entered a username and color, the overlay will not be shown
       ? The user will be able to open the settings overlay to change their username and color
     -->
-    <div id="overlay">
-      <div id="usernamePrompt">
-        <div class="header">
-          <div class="title">
-            Welcome!
-            <span style="font-size:0.7rem;display:block;">Enter a username and choose a color</span>
-          </div>
+  <div id="overlay">
+    <div id="usernamePrompt">
+      <div class="header">
+        <div class="title">
+          Welcome!
+          <span style="font-size:0.7rem;display:block;">Enter a username and choose a color</span>
         </div>
-        <div class="input-container">
-          <input type="text" id="username" placeholder="Enter a Username..." required />
-          <input type="color" id="colorPicker" value="#27d655" />
-        </div>
-        <button id="joinChat">Join Chat</button>
       </div>
+      <div class="input-container">
+        <input type="text" id="username" placeholder="Enter a Username..." required />
+        <input type="color" id="colorPicker" value="#27d655" />
+      </div>
+      <button id="joinChat">Join Chat</button>
     </div>
-    
+  </div>
+
 
   <!-- 
       ! Settings Overlay 
@@ -113,24 +113,29 @@ Copyright (c) 2023 Tone Web Design, Molex
       ? It will be shown after the user enters their username and color
       ? It will show the messages and allow the user to send messages
     -->
-  <ul id="messages"></ul>
-  <div id="tools">
-    <div id="typingArea"></div>
-    <div class="bar-btn-group">
-      <button id="openYouTube" class="bar-btn" type="button">
-        <i class="fa-brands fa-youtube"></i>
-      </button>
-      <button id="selectImageButton" class="bar-btn" type="button">
-        <i class="fa-regular fa-images"></i>
-      </button>
+    <div id="content">
+      <div id="messagesContainer">
+        <ul id="messages"></ul>
+      </div>
+      <div id="tools">
+        <div id="typingArea"></div>
+        <div class="bar-btn-group">
+          <button id="openYouTube" class="bar-btn" type="button">
+            <i class="fa-brands fa-youtube"></i>
+          </button>
+          <button id="selectImageButton" class="bar-btn" type="button">
+            <i class="fa-regular fa-images"></i>
+          </button>
+        </div>
+      </div>
+    
+      <form id="chatForm" class="flex-container">
+        <input id="inputMessage" autocomplete="off" placeholder="Enter message..." />
+        <input type="file" id="imageInput" accept="image/*" style="display: none" />
+        <button class="send-btn"><i class="fa-regular fa-paper-plane fa-2x"></i></button>
+      </form>
     </div>
-  </div>
-
-  <form id="chatForm" class="flex-container">
-    <input id="inputMessage" autocomplete="off" placeholder="Enter message..." />
-    <input type="file" id="imageInput" accept="image/*" style="display: none" />
-    <button class="send-btn"><i class="fa-regular fa-paper-plane fa-2x"></i></button>
-  </form>
+  
 
   <script>
     const selectImageButton = document.getElementById('selectImageButton');

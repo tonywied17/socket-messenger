@@ -1,14 +1,16 @@
 /*
  * File: c:\Users\tonyw\Desktop\socketChat\public\js\messenger.js
- * Project: c:\Users\tonyw\AppData\Local\Temp\scp06458\public_html\messenger.tonewebdesign.com\public\js
+ * Project: c:\Users\tonyw\Desktop\GIT Messenger\socket-messenger
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 2:34:44 
+ * Last Modified: Mon August 21st 2023 6:28:04 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
  */
+
+document.addEventListener("DOMContentLoaded", () => {
 const socket = io();
 
 // Get LocalStorage
@@ -124,7 +126,7 @@ socket.on("system message", function (message) {
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
 
-    Id("messages").scrollTop = Id("messages").scrollHeight;
+    Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
 });
 
 /**
@@ -148,7 +150,9 @@ socket.on("chat message", function (data) {
     const li = document.createElement("li");
     li.innerHTML = `<span style="color:${userColor}">${username}:</span> ${convertedMessage}`;
     Id("messages").appendChild(li);
-    Id("messages").scrollTop = Id("messages").scrollHeight;
+
+    Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
+    
 });
 
 /**
@@ -161,7 +165,7 @@ socket.on("color updated", function (data) {
     li.innerHTML = `${data.message} <span style="background-color:${data.color}; display: inline-block; width: 14px; height: 14px; border-radius: 50%;"></span>`;
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
-    Id("messages").scrollTop = Id("messages").scrollHeight;
+    Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
 });
 
 /**
@@ -174,7 +178,7 @@ socket.on("username updated", function (data) {
     li.textContent = data.message;
     li.style.color = "#E74C3C";
     Id("messages").appendChild(li);
-    Id("messages").scrollTop = Id("messages").scrollHeight;
+    Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
 });
 
 /**
@@ -237,7 +241,7 @@ socket.on("receive image", function (data) {
     img.alt = "Shared Image";
     img.width = 200;
     img.onload = function () {
-        Id("messages").scrollTop = Id("messages").scrollHeight;
+        Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
     };
 
     li.innerHTML = `<div style="color:${data.userColor}">${data.username}:</div>`;
@@ -388,7 +392,7 @@ function sendYouTubeLink(videoId) {
         userColor,
     });
 
-    Id("messages").scrollTop = Id("messages").scrollHeight;
+    Id("messagesContainer").scrollTop = Id("messagesContainer").scrollHeight;
 }
 
 /**
@@ -445,3 +449,5 @@ function convertToEmbedURL(match, p1, p2, p3) {
     const videoID = p2 || p3;
     return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoID}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 }
+
+});
