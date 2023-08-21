@@ -4,7 +4,7 @@
  * Created Date: Thursday August 17th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 2:25:08 
+ * Last Modified: Mon August 21st 2023 2:36:15 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -271,6 +271,7 @@ nav button:hover {
   padding: 0;
   max-height: 200px;
   overflow-y: auto; 
+  margin-top: 1em;
 }
 
 #searchResults li {
@@ -342,16 +343,7 @@ nav button:hover {
   }
   
   /* Style for the YouTube icon container */
-  #openYouTube, .upload-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px; 
-    height: 40px;
-    background-color: #e74c3c; 
-    border-radius: 4px; 
-    font-size: 0.8rem !important;
-  }
+
 
   #imageInput + label {
     height: 40px; 

@@ -4,7 +4,7 @@
  * Created Date: Friday August 18th 2023
  * Author: Tony Wiedman
  * -----
- * Last Modified: Mon August 21st 2023 1:12:30 
+ * Last Modified: Mon August 21st 2023 2:36:29 
  * Modified By: Tony Wiedman
  * -----
  * Copyright (c) 2023 Tone Web Design, Molex
@@ -232,11 +232,11 @@ socket.on("receive image", function (data) {
     console.log("Received image on client:", data);
     const li = document.createElement("li");
     const img = document.createElement("img");
-    
+
     img.src = data.imageData;
     img.alt = "Shared Image";
     img.width = 200;
-    img.onload = function() {
+    img.onload = function () {
         Id("messages").scrollTop = Id("messages").scrollHeight;
     };
 
@@ -296,9 +296,8 @@ socket.on("user stopped typing", function (data) {
 function updateTypingArea(typingArea) {
     const typingUsersArray = Array.from(typingUsers);
     if (typingUsersArray.length > 0) {
-        typingArea.textContent = `${typingUsersArray.join(", ")} ${
-            typingUsersArray.length > 1 ? "are" : "is"
-          } typing...`;
+        typingArea.textContent = `${typingUsersArray.join(", ")} ${typingUsersArray.length > 1 ? "are" : "is"
+            } typing...`;
     } else {
         typingArea.textContent = "";
     }
@@ -339,31 +338,6 @@ Id("ytOverlay").addEventListener("click", function (event) {
 });
 
 /**
- * Listen for search button click
- * Search YouTube
- * @returns {void}
- */
-document
-    .getElementById("searchYouTube")
-    .addEventListener("click", async () => {
-        const searchQuery =
-            Id("youtubeSearchInput").value;
-        const searchResults = await searchYouTube(searchQuery);
-
-        Id("searchResults").innerHTML = "";
-
-        searchResults.forEach((result) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = result.title;
-            listItem.addEventListener("click", () => {
-                sendYouTubeLink(result.videoId);
-                Id("ytOverlay").style.display = "none";
-            });
-            Id("searchResults").appendChild(listItem);
-        });
-    });
-
-/**
  * Listen for youtube search results
  * @param {Array} results - array of search results
  * @returns {void}
@@ -379,14 +353,13 @@ socket.on("youtube search results", (results) => {
     });
 });
 
-
 /**
  * Search YouTube API
  * @param {string} query - search query
  * @returns 
  */
 async function searchYouTube(query) {
-    
+
     const apiKey = "";
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
 
@@ -419,6 +392,40 @@ function sendYouTubeLink(videoId) {
 }
 
 /**
+ * Search YouTube Handler
+ * @returns {void}
+ */
+const searchYouTubeFunction = async () => {
+    const searchQuery = Id("youtubeSearchInput").value;
+    const searchResults = await searchYouTube(searchQuery);
+
+    Id("searchResults").innerHTML = "";
+
+    searchResults.forEach((result) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = result.title;
+        listItem.addEventListener("click", () => {
+            sendYouTubeLink(result.videoId);
+            Id("ytOverlay").style.display = "none";
+        });
+        Id("searchResults").appendChild(listItem);
+    });
+};
+
+/**
+ * Listen for search button click, and input enter key
+ * Search YouTube
+ * @returns {void}
+ */
+Id("searchYouTube").addEventListener("click", searchYouTubeFunction);
+
+Id("youtubeSearchInput").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        searchYouTubeFunction();
+    }
+});
+
+/**
  * YouTube URL pattern
  * @type {RegExp}
  * @returns {void}
@@ -438,4 +445,3 @@ function convertToEmbedURL(match, p1, p2, p3) {
     const videoID = p2 || p3;
     return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoID}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 }
-
